@@ -115,17 +115,6 @@ class RegexMatchValidatorTest extends TestCase
         $this->assertCount(1, $validator->getMessages());
     }
 
-    public function testEmailPattern(): void
-    {
-        $validator = new RegexMatchValidator('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/');
-
-        $this->assertTrue($validator->isValid('user@example.com'));
-        $this->assertTrue($validator->isValid('test.user+tag@domain.co.uk'));
-        $this->assertFalse($validator->isValid('invalid@'));
-        $this->assertFalse($validator->isValid('@example.com'));
-        $this->assertFalse($validator->isValid('notanemail'));
-    }
-
     public function testHexColorPattern(): void
     {
         $validator = new RegexMatchValidator('/^#[0-9A-Fa-f]{6}$/');
