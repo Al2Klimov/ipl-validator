@@ -88,14 +88,10 @@ class RegexMatchValidatorTest extends TestCase
 
     public function testInvalidRegexPattern(): void
     {
-        $validator = new RegexMatchValidator('/[/'); // Unclosed character class
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('failed to compile');
 
-        $this->assertFalse($validator->isValid('test'));
-
-        $messages = $validator->getMessages();
-        $this->assertCount(1, $messages);
-        $this->assertStringContainsString('internal error', $messages[0]);
-        $this->assertStringContainsString('/[/', $messages[0]);
+        new RegexMatchValidator('/[/'); // Unclosed character class
     }
 
     public function testMultipleIsValidCalls(): void
